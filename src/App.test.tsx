@@ -1,7 +1,9 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import "@testing-library/jest-dom";
 import App from './App';
+import axios from 'axios'
+import renderer, { act } from 'react-test-renderer';
 
 
 describe('App', () => {
@@ -42,5 +44,14 @@ describe('App', () => {
     screen.getAllByTestId("square-6")[0].click();
     screen.getAllByTestId("move-0")[0].click();
     expect(screen.getAllByTestId("square-0")[0]).toBeEmptyDOMElement()
+  });
+
+  test('API work', async () => {
+    const response = { status: true};
+    const axiosGetSpy = jest.spyOn(axios, 'get').mockResolvedValueOnce(response);
+    render(<App />);
+    expect(axiosGetSpy).toBeCalledWith('http://localhost:3002/test');
+    await waitFor(() => expect(screen.getAllByTestId("next-player")[0]).toHaveTextContent("Next player: O"))
+    axiosGetSpy.mockRestore();
   });
 });

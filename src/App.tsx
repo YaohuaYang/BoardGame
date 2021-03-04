@@ -1,12 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './App.css';
 import Board from './components/board';
-import { CalculateWinner} from './utils/calculateWinner'
+import { CalculateWinner} from './utils/calculateWinner';
 
 const App: React.FC = () => {
   const [history, setHistory] = useState<String[][]>(Array(1).fill(Array(9).fill(null)));
   const [stepNumber, setStepNumber] = useState<number>(0);
   const [xIsNext, setXIsNext] = useState<Boolean>(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await axios.get(`http://localhost:3002/test`)
+      .then((res) => {
+        if(res.status){
+          setXIsNext(false);
+        }
+      })
+      .catch((err) => {
+      });
+    };
+    fetchData();
+  }, []);
 
   const handleClick = (i: number) => {
     const currentHistory = history.slice(0, stepNumber + 1);
