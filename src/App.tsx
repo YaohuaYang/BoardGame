@@ -31,7 +31,7 @@ const App: React.FC = () => {
       'Go to game start';
     return (
       <li key={move}>
-        <button onClick={() => jumpTo(move)}>{desc}</button>
+        <button onClick={() => jumpTo(move)} data-testid={"move-" + move}>{desc}</button>
       </li>
     );
   })
@@ -50,7 +50,7 @@ const App: React.FC = () => {
           />
         </div>
         <div className="game-info">
-          <div>{status}</div>
+          <div  data-testid="next-player">{status}</div>
           <ol>{moves}</ol>
         </div>
       </div>
