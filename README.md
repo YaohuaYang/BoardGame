@@ -1,6 +1,11 @@
-# Getting Started with Create React App
+# BoardGame functional component and test implementation
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Project ref: https://reactjs.org/tutorial/tutorial.html
+
+The project is
+1. changing class component to function component
+2. writing unit test for each component 
 
 ## Available Scripts
 
