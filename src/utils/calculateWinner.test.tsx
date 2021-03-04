@@ -44,3 +44,35 @@ test("these games shouldn't start due to inbalance play", () => {
   })
 })
 
+test("winner is O", () => {
+  const games = [
+    ["O", "O", "X", "X", "O", "O", "X", "X", "O"], // 0,4,8
+    ["X", "X", "O", "X", null, "O", "O", "X", "O"], // 2,5,8
+    ["O", "O", "O", "X", "X", null, null, null, null], // 0,1,2
+  ]
+  games.forEach(game => {
+    expect(CalculateWinner(game)).toEqual("O")
+  })
+})
+
+test("winner is X", () => {
+  const games = [
+    ["O", "O", "X", "X", "X", "O", "X", "X", "O"], // 2,4,6
+    ["X", "O", null, "X", null, "O", "X", "X", "O"], // 0,3,6
+    ["O", "O", null, "X", "X", "X", null, null, null], // 3,4,5
+  ]
+  games.forEach(game => {
+    expect(CalculateWinner(game)).toEqual("X")
+  })
+})
+
+test("no winner now", () => {
+  const games = [
+    ["O", "O", "X", "X", null, "O", "X", "X", "O"],
+    ["X", "X", "O", "X", null, null, "O", "X", "O"], 
+    ["O", "O", null, "X", "X", null, null, null, null], 
+  ]
+  games.forEach(game => {
+    expect(CalculateWinner(game)).toEqual(null)
+  })
+})
