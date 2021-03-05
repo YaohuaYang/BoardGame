@@ -3,7 +3,6 @@ import { render, screen, waitFor } from '@testing-library/react';
 import "@testing-library/jest-dom";
 import App from './App';
 import axios from 'axios'
-import renderer, { act } from 'react-test-renderer';
 
 
 describe('App', () => {
